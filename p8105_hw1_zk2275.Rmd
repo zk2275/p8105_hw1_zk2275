@@ -44,11 +44,47 @@ data2 =
     vec_num = rnorm(10, sd = 1, mean = 1),
     vec_logic = vec_num > 0,
     vec_char = character(10),
-    vec_level <- factor(rep(1:3, length.out = 10), levels = c("a", "b" , "b"))
+    vec_level = factor(rep(1:3, length.out = 10), levels = c("low", "median" , "high"))
 
-  )
+         )
 data2
 ```
 
+
+## Try the pull function to calculate the mean of each variable
+
+```{r}
+num <- data2 %>% pull(vec_num)
+mean(num)
+logic <- data2 %>% pull(vec_logic)
+mean(logic)
+char <- data2 %>% pull(vec_char)
+mean(char)
+fac<- data2 %>% pull(vec_level)
+mean(fac)
+```
+
+* The sample of size 10 and the logical vector can work, but the character vector and the factor vector don't work.
+
+## Convert variables
+
+```{r ,eval=FALSE}
+logic_2_num <- as.numeric(logic)
+char_2_num <- as.numeric(char)
+fac_2_num <- as.numeric(fac)
+logic_2_num
+char_2_num
+fac_2_num
+```
+
+*  The values of the logical variable are one or zero, which stands or 'true' and 'false'.
+
+*  The values of the character variable are NAs, because the original values are NAs. But if original values are not null, the converted ones are still null, which could not be recognized as numbers.
+
+*  The values of the factor variable are all null.
+
+## But it does help explain what happens when I try to take the mean.
+
+We can only take the mean when the variables are or can be converted to numbers!
 
 
