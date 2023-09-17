@@ -5,26 +5,32 @@ date: "2023-9-16"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Problem 1
+
+## Load the library and dataset
+
+```{r}
+library(moderndive)
+library(ggplot2)
+data("early_january_weather")
 ```
 
-## R Markdown
+## Short description using inline R code
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+* The dataset has 15 variables, including `r names(early_january_weather)`. Besides, it records temperatures and pressures, and other characters in `r length(early_january_weather$origin)` different origins, from `r min(early_january_weather$time_hour)` to `r max(early_january_weather$time_hour)`.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* This dataset has `r nrow(early_january_weather)` row and `r ncol(early_january_weather)` columns.
 
-```{r cars}
-summary(cars)
+* The mean temperature is `r mean(early_january_weather$temp)`.
+
+## Make a plot and export it to my project directory
+
+```{r}
+ggplot(early_january_weather, aes(x=time_hour, y = temp, color = humid)) + geom_point()
+
+ggsave("scatter_plot.pdf", height = 4, width = 6)
 ```
 
-## Including Plots
+In the two weeks recorded by the data, the temperature showed a cyclical change every day, and the overall trend was rising. The humidity is generally rising with the temperature.
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
