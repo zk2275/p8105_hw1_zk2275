@@ -12,6 +12,7 @@ output: github_document
 ```{r}
 library(moderndive)
 library(ggplot2)
+library(tidyverse)
 data("early_january_weather")
 ```
 
@@ -32,5 +33,22 @@ ggsave("scatter_plot.pdf", height = 4, width = 6)
 ```
 
 In the two weeks recorded by the data, the temperature showed a cyclical change every day, and the overall trend was rising. The humidity is generally rising with the temperature.
+
+# Problem 2
+
+## Create a data frame
+
+```{r}
+data2 =
+  tibble(
+    vec_num = rnorm(10, sd = 1, mean = 1),
+    vec_logic = vec_num > 0,
+    vec_char = character(10),
+    vec_level <- factor(rep(1:3, length.out = 10), levels = c("a", "b" , "b"))
+
+  )
+data2
+```
+
 
 
